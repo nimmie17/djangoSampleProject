@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample App</title>
+</head>
+<body>
+    <h1>Enter Phone Number</h1>
+    <form action="{%url 'validate'%}" method="post">
+        {% csrf_token %}
+        <input type="text" name="phone_number" placeholder="Enter phone number" required>
+        <button type="submit">Validate</button>
+    </form>
+    {% if is_valid %}
+        <h2>Phone Number Details</h2>
+        <p><strong>Formatted Number:</strong> {{ formatted_number }}</p>
+        <p><strong>Country Code:</strong> {{ country_code }}</p>
+        <p><strong>National Number:</strong> {{ national_number }}</p>
+        <p><strong>Region:</strong> {{ region }}</p>
+        <p><strong>Country:</strong> {{ country }}</p>
+        <p><strong>Service Provider:</strong> {{ carrier }}</p>
+        <p><strong>Timezone:</strong> {{ timezone }}</p>
+    {% elif error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+</body>
+</html>
